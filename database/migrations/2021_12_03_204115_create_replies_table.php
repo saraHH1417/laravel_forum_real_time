@@ -33,6 +33,8 @@ class CreateRepliesTable extends Migration
                 ->onUpdate('cascade');
 
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 
