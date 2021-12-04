@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ReplyResource;
 use App\Models\Question;
 use App\Models\Reply;
 use Illuminate\Http\Request;
@@ -12,11 +13,11 @@ class ReplyController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index(Question $question)
     {
-        return $question->replies;
+        return ReplyResource::collection($question->replies);
     }
 
     /**
@@ -39,7 +40,7 @@ class ReplyController extends Controller
     {
         $reply = $question->replies()->create($request->all());
 
-        return response(['reply' => $reply] , Response::HTTP_CREATED);
+        return response(['reply' => new ReplyResource($reply)] , Response::HTTP_CREATED);
     }
 
     /**
@@ -50,7 +51,7 @@ class ReplyController extends Controller
      */
     public function show(Question $question ,Reply $reply)
     {
-        return $reply;
+        return new ReplyResource($reply);
     }
 
     /**
