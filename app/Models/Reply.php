@@ -10,6 +10,12 @@ class Reply extends Model
 {
     use HasFactory , SoftDeletes;
 
+    protected $fillable = [
+        'body',
+        'question_id',
+        'user_id'
+    ];
+
     public function question()
     {
         return $this->belongsTo(Question::class);
