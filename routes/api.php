@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ReplyController;
 use Illuminate\Http\Request;
@@ -27,3 +29,18 @@ Route::apiResource('/questions' , QuestionController::class);
 Route::apiResource('/categories' , CategoryController::class);
 
 Route::apiResource('/{question}/reply' , ReplyController::class);
+
+Route::post('/reply/{reply}/like' , [LikeController::class , 'likeIt']);
+Route::delete('/reply/{reply}/like' , [LikeController::class , 'unLikeIt']);
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/refresh', [AuthController::class, 'refresh']);
+    Route::get('/user-profile', [AuthController::class, 'userProfile']);
+});

@@ -10,6 +10,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ReplyController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('jwt' , ['except' => ['index' , 'show']]);
+    }
     /**
      * Display a listing of the resource.
      *
