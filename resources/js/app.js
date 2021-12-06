@@ -8,6 +8,10 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 import vuetify from './vuetify';
+
+import User from './Helpers/User';
+window.User = User;
+console.log(User.id());
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
