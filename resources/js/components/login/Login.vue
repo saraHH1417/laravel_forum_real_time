@@ -21,20 +21,12 @@
                 type="submit">
                 Login
             </v-btn>
+
+            <router-link to="/signup">
+                <v-btn color="blue" text>Sign Up</v-btn>
+            </router-link>
         </v-container>
     </v-form>
-<!--    <form @submit.prevent="login">-->
-
-<!--        &lt;!&ndash; email input &ndash;&gt;-->
-<!--        <input type="email" v-model="email" placeholder="Email">-->
-
-<!--        &lt;!&ndash; password input &ndash;&gt;-->
-<!--        <input type="password" v-model="password" placeholder="Password">-->
-
-<!--        &lt;!&ndash; submit button &ndash;&gt;-->
-<!--        <button type="submit">Submit</button>-->
-
-<!--    </form>-->
 </template>
 
 <script>
@@ -47,9 +39,15 @@
                 }
             }
         },
+        created(){
+            if(User.loggedIn()){
+                this.$router.push({name : 'forum'})
+            }
+        },
         methods:{
             login(){
                 User.login(this.form)
+                this.$router.push({name :'forum'})
             }
 
         }
