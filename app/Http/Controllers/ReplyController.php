@@ -17,9 +17,10 @@ class ReplyController extends Controller
     }
     /**
      * Display a listing of the resource.
-     *
+     * @param \App\Models\Question $question
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
+
     public function index(Question $question)
     {
         return ReplyResource::collection($question->replies);
@@ -51,14 +52,15 @@ class ReplyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Reply  $reply
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Question $question;
+     * @param \App\Models\Reply $reply
+     * @return ReplyResource
      */
-    public function show(Question $question ,Reply $reply)
+
+    public function show(Question $question, Reply $reply)
     {
         return new ReplyResource($reply);
     }
-
     /**
      * Show the form for editing the specified resource.
      *

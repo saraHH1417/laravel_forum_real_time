@@ -13,6 +13,8 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+const JWTtoken = `Bearer ${localStorage.getItem('token')}`;
+window.axios.defaults.headers.common['authorization'] = JWTtoken;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

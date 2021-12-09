@@ -16,7 +16,7 @@
              :to="item.to"
              v-if="item.show"
             >
-                <v-btn flat>
+                <v-btn text>
                     {{item.title}}
                 </v-btn>
             </router-link>

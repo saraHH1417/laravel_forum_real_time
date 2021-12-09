@@ -47,26 +47,25 @@ class QuestionController extends Controller
 //        auth()->user()->question()->create($request->all());
 //        $request->slug = Str::slug($request->name);
 //        Question::create($request->all());
-        Question::create([
-            'title' => $request->title,
-            'slug' => Str::slug($request->title),
-            'body' => $request->body,
-            'user_id' => $request->user_id,
-            'category_id' => $request->category_id
-        ]);
-        return response('Created' , ResponseAlias::HTTP_CREATED);
+        $question = auth()->user()->question()->create($request->all());
+        return response(new QuestionResource($question) , ResponseAlias::HTTP_CREATED);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Question  $question
+     * @param  \App\Models\Question question
      * @return \Illuminate\Http\Response
      */
     public function show(Question $question)
     {
         return new QuestionResource($question);
     }
+//    public function show($id){
+//
+//        $question = Question::findOrFail($id);
+//        return new QuestionResource($question);
+//    }
 
     /**
      * Show the form for editing the specified resource.
