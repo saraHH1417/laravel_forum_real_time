@@ -30,4 +30,13 @@ class Reply extends Model
     {
         return $this->hasMany(Like::class);
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($reply){
+            $reply->user_id = auth()->id();
+        });
+    }
 }

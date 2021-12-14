@@ -19,6 +19,8 @@ class Question extends Model
         'user_id'
     ];
 
+    protected $with = ['replies'];
+
 //    protected $guarded = [];
 
     protected static function boot(){
@@ -44,7 +46,7 @@ class Question extends Model
 
     public function replies()
     {
-        return $this->hasMany(Reply::class);
+        return $this->hasMany(Reply::class)->latest();
     }
 
     public function categories()
@@ -54,6 +56,6 @@ class Question extends Model
 
     public function getPathAttribute()
     {
-        return "questions/$this->slug";
+        return "/questions/$this->slug";
     }
 }

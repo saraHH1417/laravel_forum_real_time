@@ -10,6 +10,10 @@
             <v-toolbar-title>Title</v-toolbar-title>
 
             <v-spacer></v-spacer>
+
+            <app-notification v-if="loggedIn">
+
+            </app-notification>
             <router-link
              v-for="item in items"
              :key="item.title"
@@ -25,13 +29,16 @@
     </v-card>
 </template>
 <script>
+    import AppNotification from "./AppNotification"
     export default {
+        components:{AppNotification},
         data(){
           return {
+              loggedIn: User.loggedIn(),
               items : [
                   {title : 'Forum' , to:'/forum' , show:true},
                   {title : 'Ask Question' , to:'/ask' , show: User.loggedIn()},
-                  {title : 'Category' , to:'/category' , show: User.loggedIn()},
+                  {title : 'Category' , to:'/category' , show: User.admin()},
                   {title : 'Login' , to:'/login' , show: !User.loggedIn()},
                   {title : 'Logout' , to:'/logout' , show: User.loggedIn()},
               ]

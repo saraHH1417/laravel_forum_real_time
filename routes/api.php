@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ReplyController;
 use Illuminate\Http\Request;
@@ -32,6 +33,15 @@ Route::apiResource('/{question}/reply' , ReplyController::class);
 
 Route::post('/reply/{reply}/like' , [LikeController::class , 'likeIt']);
 Route::delete('/reply/{reply}/like' , [LikeController::class , 'unLikeIt']);
+
+Route::post('/notifications' , [NotificationController::class , 'index']);
+Route::post('/markAsRead' , [NotificationController::class, 'markAsRead']);
+//Route::post('notifications' , function (){
+//    return [
+//        'read' => auth()->user()->readNotifications(),
+//        'unread' => auth()->user()->unReadNotifications()
+//    ];
+//});
 
 Route::group([
     'middleware' => 'api',
