@@ -15,7 +15,12 @@
             <v-container>
                 <replies :question="question"></replies>
                 <h5>Add Reply</h5>
-                <new-reply :questionSlug="question.slug"></new-reply>
+                <new-reply v-if="loggedIn" :questionSlug="question.slug"></new-reply>
+                <div class="mt-4">
+                    <router-link to="/login">
+                        Login to reply
+                    </router-link>
+                </div>
             </v-container>
         </div>
     </div>
@@ -38,6 +43,11 @@ import NewReply from "../reply/NewReply"
         created(){
             this.listen(),
             this.getQuestion()
+        },
+        computed:{
+            loggedIn(){
+                return User.loggedIn()
+            }
         },
         methods:{
             listen(){
