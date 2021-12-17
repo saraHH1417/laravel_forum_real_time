@@ -4,10 +4,14 @@
         flat
         tile
     >
-        <v-toolbar>
+        <v-toolbar color="indigo" dark>
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-            <v-toolbar-title>Title</v-toolbar-title>
+            <v-toolbar-title>
+                <router-link class="white--text" to="/">
+                    SS Real Time Blog
+                </router-link>
+            </v-toolbar-title>
 
             <v-spacer></v-spacer>
 

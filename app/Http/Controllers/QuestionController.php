@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\QuestionRequest;
 use App\Http\Resources\QuestionResource;
 use App\Http\Resources\ReplyResource;
 use App\Models\Question;
@@ -170,7 +171,7 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(QuestionRequest $request)
     {
 //        auth()->user()->question()->create($request->all());
 //        $request->slug = Str::slug($request->name);
