@@ -32,6 +32,24 @@ export default {
                 axios.delete(`/api/${this.question.slug}/reply/${this.content[index].id}`)
                 .then(res => this.content.splice(index, 1))
             })
+            Echo.private('App.Models.User.' + User.id())
+                .notification((notification) => {
+                    this.content.unshift(notification.reply)
+                });
+            Echo.channel('likeChannel')
+                .listen('LikeEvent', (e) => {
+                    if(this.content.id == e.id){
+                        e.type == 1 ? this.count++ : this.count--
+                    }
+                });
+            Echo.channel('deleteReplyChannel')
+            .listen('DeleteReplyEvent' , (e) => {
+                for(let index =0 ; index < this.content.lenght ; index++){
+                    if(this.content[index].id == e.id){
+                        this.content.splice(index,1)
+                    }
+                }
+            })
 
         }
     }

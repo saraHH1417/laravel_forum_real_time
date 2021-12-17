@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DeleteReplyEvent;
 use App\Http\Resources\ReplyResource;
 use App\Models\Question;
 use App\Models\Reply;
@@ -48,6 +49,7 @@ class ReplyController extends Controller
     {
         $reply = $question->replies()->create($request->all());
         $user = $question->user;
+        broadcast(new DeleteReplyEvent($reply->id , 1))->toOthers();
         if($reply->user_id !== $question->user_id){
             $user->notify(new NewReplyNotification($reply));
         }
@@ -100,7 +102,7 @@ class ReplyController extends Controller
     public function destroy(Question $question, Reply $reply)
     {
         $reply->delete();
-
+        broadcast(new DeleteReplyEvent($reply->id))->toOthers();
         return response(null , Response::HTTP_NO_CONTENT);
     }
 }

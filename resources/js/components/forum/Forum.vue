@@ -8,6 +8,7 @@
                     :data=question
                 >
                 </question>
+
             </v-flex>
 
             <v-flex xs4>
@@ -28,8 +29,8 @@ export default {
     },
     components:{Question , AppSidebar},
     created() {
-        axios.get('api/questions')
-        .then(res => this.questions = res.data.data)
+        axios.get('api/questions?page')
+        .then(res => this.questions = res.data.questions.data)
         .catch(error => console.log(error.response.data))
     }
 }

@@ -18,12 +18,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         \App\Models\User::factory(10)->create();
-         Category::factory(5)->create();
-         Question::factory(10)->create();
-         Reply::factory(50)->create()->each(function ($reply){
-             return $reply->likes()->save(Like::factory()->make());
-         });
+//         \App\Models\User::factory(10)->create();
+//         Category::factory(5)->create();
+         Question::factory(5000)->create();
+//         Reply::factory(50)->create()->each(function ($reply){
+//             return $reply->likes()->save(Like::factory()->make());
+//         });
 
     }
 }

@@ -21,12 +21,14 @@ class QuestionFactory extends Factory
             'title' => $title,
             'slug' => Str::slug($title),
             'body' => $this->faker->text,
-            'category_id' => function () {
-                return Category::all()->random();
-            },
-            'user_id' => function () {
-                return User::all()->random();
-            }
+//            'category_id' => function () {
+//                return Category::all()->random();
+//            },
+//            'user_id' => function () {
+//                return User::all()->random();
+//            }
+            'category_id' => 1,
+            'user_id' => 1
         ];
     }
 

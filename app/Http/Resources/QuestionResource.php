@@ -28,4 +28,9 @@ class QuestionResource extends JsonResource
             'user_id' => $this->user->id
         ];
     }
+
+//    public function withResponse($request, $response)
+//    {
+//        $response->getData(true);
+//    }
 }

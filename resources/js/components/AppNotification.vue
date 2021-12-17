@@ -51,6 +51,11 @@ export default {
         if(User.loggedIn()){
             this.getNotifications()
         }
+        Echo.private('App.Models.User.' + User.id())
+            .notification((notification) => {
+                this.unread.unshift(notification)
+                this.unreadCount++
+            });
     },
     methods: {
         getNotifications(){
@@ -74,9 +79,10 @@ export default {
         color(){
             return this.unreadCount > 0 ? 'red' : 'red lighten-4'
         },
+    },
 
 
-    }
+
 
 }
 </script>

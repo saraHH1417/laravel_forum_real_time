@@ -26,7 +26,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::apiResource('/questions' , QuestionController::class);
-
+Route::get('/two' , [QuestionController::class , 'indexTwo']);
+Route::get('/questionsRepository' , [QuestionController::class , 'indexThreeWithRepository']);
+Route::get('/questionsRepositoryResource' , [QuestionController::class , 'indexFourWithRepositoryForResource']);
 Route::apiResource('/categories' , CategoryController::class);
 
 Route::apiResource('/{question}/reply' , ReplyController::class);
